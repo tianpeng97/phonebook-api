@@ -1,0 +1,195 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #036ffc;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.auth-button {
+  margin: 1.2rem 0;
+  padding: 1.2rem 0;
+}
+
+.center-title {
+  text-align: center;
+}
+
+.container {
+  background-color: white;
+  color: black;
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.form-content {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.form-input {
+  width: 70%;
+}
+
+.form-submit {
+  width: 20%;
+}
+
+.form-submit-button {
+  border-color: #036ffc;
+  background-color: white;
+  color: black;
+  width: 100%;
+  cursor: pointer;
+  height: 100%;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+}
+.form-submit-button:hover {
+  background-color: #036ffc;
+  color: white;
+}
+
+.entry-form {
+  margin: 1.2rem;
+  padding: 1.2rem;
+  border-radius: 10px;
+  background-color: #e3f2fd;
+}
+
+.error {
+  color: red;
+  background: lightgray;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.form-floating {
+  margin: 1rem 0;
+}
+
+.input {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid black;
+  background: none;
+}
+
+.navbar {
+  background-color: #e3f2fd;
+  padding: 0 5px;
+}
+
+.nav-button {
+  border: none;
+  background-color: transparent;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+.options {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.person-form {
+  margin: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 70%;
+}
+
+.phonebook {
+  width: 70%;
+  border-collapse: collapse;
+  border: 2px solid black;
+  margin-bottom: 2rem;
+}
+
+.phonebook-body {
+  overflow-y: scroll;
+}
+
+.phonebook-entry {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 8px;
+}
+
+.phonebook-header {
+  width: 100%;
+  background-color: #036ffc;
+  color: white;
+  text-align: left;
+}
+
+.phonebook-row:hover {
+  background-color: #036ffc;
+  color: white;
+}
+.phonebook-row:hover .options {
+  color: white;
+}
+.phonebook-row:hover .options:hover {
+  color: red;
+}
+
+.phonebook-title {
+  margin: 1.2rem 0;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.title {
+  margin: 1rem 0;
+}
+
+.title-base {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.title-base-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#root {
+  padding-bottom: 2rem;
+}
+
+#footer {
+  background-color: #e3f2fd;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2rem;
+}/*# sourceMappingURL=index.css.map */

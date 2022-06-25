@@ -44,13 +44,12 @@ personsRouter.get('/', async (req, res) => {
       return res.status(401).json({ error: 'Token missing or invalid.' })
     }
 
-    const persons = await Person.find({ user: decodedToken.id }).populate(
-      'user',
-      {
-        username: 1,
-        name: 1,
-      }
-    )
+    const persons = await Person.find({ user: decodedToken.id })
+    // if want to populate
+    // .populate('user', {
+    //   username: 1,
+    //   name: 1,
+    // })
     res.json(persons)
   } else {
     // if user no auth should not fetch any data
@@ -58,31 +57,39 @@ personsRouter.get('/', async (req, res) => {
   }
 })
 
-personsRouter.get('/:id', (req, res, next) => {
-  Person.findById(req.params.id)
-    .then((person) => {
-      if (person) {
-        res.json(person)
-      } else {
-        res.status(404).end()
-      }
-    })
-    .catch((error) => next(error))
+// TODO
+personsRouter.get('/:id', async (req, res) => {
+  const person = await Person.findById(req.params.id)
+  if (person) {
+    res.json(person)
+  } else {
+    res.status(404).end()
+  }
 })
 
-personsRouter.put('/:id', (req, res, next) => {
-  Person.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-    context: 'query',
-  })
-    .then((person) => {
+personsRouter.put('/:id', async (req, res) => {
+  const token = getTokenFrom(req)
+  if (token) {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!decodedToken.id) {
+      return res.status(401).json({ error: 'Token missing or invalid.' })
+    }
+
+    const person = await Person.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+      context: 'query',
+    })
+
+    // if already deleted
+    if (person) {
       res.json(person)
-    })
-    .catch((error) => {
-      console.log('no number')
-      return next(error)
-    })
+    } else {
+      res.status(404).json({ error: 'Content already deleted.' })
+    }
+  } else {
+    // TODO ERROR HANDLING
+  }
 })
 
 personsRouter.delete('/:id', (req, res, next) => {

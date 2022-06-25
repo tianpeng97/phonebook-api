@@ -1,13 +1,13 @@
 {
-  "name": "part3-ex",
+  "name": "phonebook",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "lint": "eslint .",
-    "build:ui": "rm -rf build && cd ../part2-ex/ && rm -rf build && npm run build && cp -r build ../part3-ex/",
-    "deploy": "git push heroku main",
+    "build:ui": "rm -rf build && cd /client/ && rm -rf build && npm run build && cp -r build ../",
+    "deploy": "git push",
     "deploy:full": "npm run build:ui && git add . && git commit -m buildui && npm run deploy",
     "dev": "nodemon index.js",
     "logs": "heroku logs --tail",

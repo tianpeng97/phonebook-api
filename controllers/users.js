@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 
 usersRouter.get('/', async (req, res) => {
   const users = await User.find({}).populate('phonebookEntries', {
@@ -14,9 +15,14 @@ usersRouter.get('/', async (req, res) => {
 usersRouter.post('/', async (req, res) => {
   const { username, name, password } = req.body
 
+  // treat cuz model takes hash
+  if (password === '') {
+    return res.status(400).json({ error: 'Empty password.' })
+  }
+
   const existingUser = await User.findOne({ username })
   if (existingUser) {
-    return res.status(400).json({ error: 'Username must be unique.' })
+    return res.status(400).json({ error: 'Username already exists.' })
   }
 
   const saltRounds = 12
@@ -30,7 +36,16 @@ usersRouter.post('/', async (req, res) => {
 
   const savedUser = await user.save()
 
-  res.status(201).json(savedUser)
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  const token = jwt.sign(userForToken, process.env.SECRET, {
+    expiresIn: 60 * 60,
+  })
+
+  res.status(201).json({ token, username: user.username, name: user.name })
 })
 
 module.exports = usersRouter
